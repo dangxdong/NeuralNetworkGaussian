@@ -1,10 +1,12 @@
 # NeuralNetworkGaussian
-ANN using Gaussian function instead of logistic function as the activation function.
+Here is a prototype of ANN using Gaussian instead of Logistic as the activation function.
 
 This is to implement the method of RBF (Radial basis function) network.
 
 The cost functions are provided here to be included in neural network models.
 
-Here gives a single-hidden-layer and a two-hidden-layer function. Two additional functions are used in them.
+The single-hidden-layer cost function is ready to used in combination with the other functions here.
 
-Cost and gradient are returned by the functions.
+The two-hidden-layer cost function will be modified later.
+
+Two (rather than one) "intercept" units are used in the input and the hidden layer, to keep the symmetry of the Gaussian distribution for the next layer.
