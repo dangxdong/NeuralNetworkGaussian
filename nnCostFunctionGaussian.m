@@ -8,11 +8,11 @@ function [J2 grad] = nnCostFunctionGaussian(nn_params, ...
 
 % First, reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
 % for our 2 layer neural network
-Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
-                 hidden_layer_size, (input_layer_size + 1));
+Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 2)), ...
+                 hidden_layer_size, (input_layer_size + 2));
 
-Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
-                 num_labels, (hidden_layer_size + 1));
+Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 2))):end), ...
+                 num_labels, (hidden_layer_size + 2));
 
 % Setup some useful variables
 m = size(X, 1);
@@ -24,14 +24,14 @@ Theta2_grad = zeros(size(Theta2));
 
 % begin to calculate J and gradients:
 
-X1 = [ones(m,1) X]; % so X1 is m * (n+1)
+X1 = [ones(m,1) X ones(m,1)]; % so X1 is m * (n+2)
 
 ZZ1 = Theta1 * X1'; % so ZZ1 is n(L2)*m dimensional
 
 % Gaussian function:
 AA1 = gaussian(ZZ1); % so AA1 is the predicted middle layer unit values
 
-AA1 = [ones(1, m); AA1]; % Now AA1 is(n(L2)+1)*m
+AA1 = [ones(1, m); AA1; ones(1, m)]; % Now AA1 is(n(L2)+2)*m
 
 % As Theta2 is n(L3) * (n(L2)+1)
 ZZ2 = Theta2 * AA1; % ZZ2 is n(L3)*m = k*m
@@ -53,8 +53,10 @@ J1 = sum(J);  % now J is a scalar, not yet regularized
 
 Temp1 = Theta1;
 Temp1(:, 1) = 0;
+Temp1(:, end) = 0;
 Temp2 = Theta2;
 Temp2(:, 1) = 0;
+Temp2(:, end) = 0;
 % So Temp1 and Temp2 are modified Theta1 and Theta2, with first columns all zeros
 % The regularization term can thus be written as:
 termR = 0.5 * lambda / m * (sum(dot(Temp1,Temp1))+sum(dot(Temp2,Temp2)));
@@ -87,7 +89,7 @@ delta2 = Theta2' * delta3;
 % delta3 is changed from k*1 to k*m. The above delta2 is thus 
 % changed from (n(L2)+1)*1 to (n(L2)+1)*m.
 
-delta2 = delta2(2:end,:);      % we only need delta2 n(L2)*m to clculate Theta1
+delta2 = delta2(2:end-1,:);      % we only need delta2 n(L2)*m to clculate Theta1
 
 % use ZZ1 to calculate the sigmoidgradient term; ZZ1 is n(L2)*m dimensional
 % instead of only the t-th column of ZZ1
