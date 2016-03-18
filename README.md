@@ -15,5 +15,7 @@ Use nnGaussian.m for modeling, by passing the trainig predictor matrix, training
 
 Then use predictCaussian.m to predict, by passing theta1, theta2 and the new data set containing the predictors. It will return predicted values in the form of decimals between 0 and 1.
 
+Then the function calcLogLoss.m can be used, to measure the log loss with the predicted values and true label values.
+
 So on top of nnGaussian.m and predictCaussian.m, you can investigate and test different parameters like the L2 regularization coefficient, here refered to by lambda.
 
