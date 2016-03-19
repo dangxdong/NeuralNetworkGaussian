@@ -17,5 +17,7 @@ Then use predictCaussian.m to predict, by passing theta1, theta2 and the new dat
 
 Then the function calcLogLoss.m can be used, to measure the log loss with the predicted values and true label values.
 
-So on top of nnGaussian.m and predictCaussian.m, you can investigate and test different parameters like the L2 regularization coefficient, here refered to by lambda.
+So on top of nnGaussian.m, predictCaussian.m and calcLogLoss.m, you can investigate and test different parameters like the hidden layer size and the L2 regularization coefficient (lambda).
+
+Special note: you may need to find fmincg.m (Carl Edward Rasmussen) and include it into your workspace directory, or try fminunc.m or other optimization functions available to Octave/Matlab.
 
