@@ -17,5 +17,7 @@ Then the function calcLogLoss.m can be used, to measure the logarithmic loss wit
 
 So on top of nnGaussian.m, predictCaussian.m and calcLogLoss.m, you can investigate and test different parameters like the hidden layer size and the L2 regularization coefficient (lambda).
 
+Beside the model with Gaussian function both between the input and hidden layers and between the hidden and output layers, a hybrid model is also provided, with Gaussian regression between the input and the hidden layers, and with logistic regression between the hidden and the output layers. The files nnGaussianLogistic.m, predictCaussianLogi.m and nnCostFuncGaussianLogistic.m are provided for this purpose.
+
 Special note: you will need to have fmincg.m (Carl Edward Rasmussen) in your workspace directory, as the optimization function for the model. The fminunc.m or other optimization functions available to Octave/Matlab may also be used.
 
