@@ -1,8 +1,12 @@
 function [Theta1, Theta2, minicost] = nnGaussian(X, y, ...
-                           hidden_layer_size, lambda = 0, maxIter = 1000)
+                           hidden_layer_size = 0, lambda = 0, maxIter = 1000)
 
 input_layer_size  = size(X,2);
-num_labels = size(y,2);  
+num_labels = size(y,2); 
+
+if (hidden_layer_size == 0) 
+    hidden_layer_size = round((input_layer_size+num_labels)/2);
+end
 
 initial_Theta1 = randInitGradGaussian(input_layer_size, hidden_layer_size);
 initial_Theta2 = randInitGradGaussian(hidden_layer_size, num_labels);
