@@ -1,4 +1,4 @@
-function p = predictCaussian(Theta1, Theta2, X)
+function [p pn]= predictCaussian(Theta1, Theta2, X)
 
 % Returns the predicted count of y given the
 % trained weights of a neural network (Theta1, Theta2)
@@ -15,5 +15,6 @@ z2 = Theta2 * h1';
 h2 = gaussian(z2);
 % just return the h2 values. 
 p = h2';
+pn = round(p);
 
 end
