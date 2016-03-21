@@ -20,6 +20,7 @@ costFunction = @(p) nnCostFunctionGaussian(p, ...
                                    num_labels, X, y, lambda);
 [nn_params, cost] = fmincg(costFunction, initial_nn_params, options);
 
+minicost = cost(end);
 
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 2)), ...
                  hidden_layer_size, (input_layer_size + 2));
